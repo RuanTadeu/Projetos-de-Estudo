@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cronometro</title>
+    <style>
+
+        body{
+            background-image: url("fundo.jpg.jpg");
+            background-size: 100% 100%;
+            background-repeat: no-repeat;
+            height: 100vh;
+        }
+        div{
+            text-align:center;
+            margin: 12%;
+        }
+
+        h1{
+            color: white;
+        }
+
+        button{
+            height: 4em;
+            width: 6em;
+            font-size: 20px;
+            border-radius: 5px;
+            border: none;
+            font-weight: bold;
+            color:rgb(71, 71, 71);
+            margin-left: 10px;
+        }
+
+        button:hover{
+            cursor: pointer;
+        }
+
+        .iniciar{
+            background-color: green;
+        }
+
+        .pausar{
+            background-color: rgb(225, 225, 30);
+        }
+
+        .encerrar{
+            background-color: black;
+        }
+    </style>
+</head>
+<body>
+    <div>
+    <h1 id="watch">00:00:00</h1>   
+    <button class="iniciar" onclick="iniciar()">Iniciar</button>
+    <button class="pausar" onclick="pausar()">Pausar</button>
+    <button class="encerrar" onclick="encerrar()">Encerrar</button>
+    </div>
+
+    <script>
+        var sec=0
+        var min=0
+        var hr=0
+
+        var interval
+
+        function twoDigits(digit){
+            if(digit<10){
+                return("0"+digit)
+            }
+            else{
+                return(digit)
+            }
+        }
+
+        function iniciar(){
+            watch()
+            interval=setInterval(watch,1000);
+        }
+
+        function pausar(){
+            clearInterval(interval);
+        }
+
+        function encerrar(){
+            clearInterval(interval)
+            sec=0
+            min=0
+            document.getElementById("watch").innerText="00:00:00"
+        }
+
+        function watch(){
+            sec++
+            if(sec==60){
+                min++
+                sec=0
+                if(min==60){
+                    min=0
+                    hr++
+                }
+            }
+            document.getElementById("watch").innerText=twoDigits(hr)+":"+twoDigits(min)+":"+twoDigits(sec)
+        }
+    </script>
+</body>
+</html>
